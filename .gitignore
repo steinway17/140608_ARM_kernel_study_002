@@ -1,3 +1,2 @@
-*.sublime*
-*.gitignore
+*.sublime*, *.gitignore
 
