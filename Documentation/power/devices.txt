@@ -769,6 +769,7 @@ but a different product using the same SOC might work differently.
 
 
 Power Management Notifiers
+전력 관리 통보
 --------------------------
 There are some operations that cannot be carried out by the power management
 callbacks discussed above, because the callbacks occur too late or too early.
@@ -780,9 +781,10 @@ interfere with user space.
 
 For details refer to Documentation/power/notifiers.txt.
 
-
+자세한 정보는 Documentation/power/notifiers.txt를 참조하세요.
 
 Runtime Power Management
+런타임 전력 관리
 ========================
 Many devices are able to dynamically power down while the system is still
 running. This feature is useful for devices that are not being used, and
