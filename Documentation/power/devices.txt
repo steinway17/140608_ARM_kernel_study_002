@@ -449,8 +449,10 @@ execute the corresponding method from dev->driver->pm instead if there is one.
 
 
 Entering System Suspend
+시스템 정지로 진입하기
 -----------------------
 When the system goes into the standby or memory sleep state, the phases are:
+시스템이 대기 혹은 메모리 슬립 상태로 진입할 때, 다음과 같은 단계가 있습니다:
 
 		prepare, suspend, suspend_late, suspend_noirq.
 
@@ -460,6 +462,11 @@ When the system goes into the standby or memory sleep state, the phases are:
 	registered at will.  (By contrast, devices may be unregistered at any
 	time.)  Unlike the other suspend-related phases, during the prepare
 	phase the device tree is traversed top-down.
+
+	1.	prepare 단계는 새 장치들이 등록되는 것을 막음으로서 경쟁을 막는 것을 의도합니다; PM 
+	core는 새로운 자식 장치들이 마음대로 등록될 수 있다면 이들이 정지 되었다는 걸 절대 모를 겁니
+	다. (반대로, 장치들은 언제든지 등록 해제될 수 있음) 다른 정지와 관련된 단계와 달리, 단계를 
+	준비하는 동안 디바이스 트리는 탑-다운 방식으로 순회됩니다. 
 
 	After the prepare callback method returns, no new children may be
 	registered below the device.  The method may also prepare the device or
@@ -773,6 +780,8 @@ can be fully active in certain sleep states, such as an LCD display that's
 refreshed using DMA while most of the system is sleeping lightly ... and
 its frame buffer might even be updated by a DSP or other non-Linux CPU while
 the Linux control processor stays idle.
+
+
 
 Moreover, the specific actions taken may depend on the target system state.
 One target system state might allow a given device to be very operational;
