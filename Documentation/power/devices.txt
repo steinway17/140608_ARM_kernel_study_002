@@ -416,14 +416,26 @@ dev->bus->pm, dev->type->pm, dev->class->pm 혹은 dev->driver->pm에 정의된 
     1.	If dev->pm_domain is present, the PM core will choose the callback
 	included in dev->pm_domain->ops for execution
 
+	1.	dev->pm_domain가 존재하면, PM core는 실행을 위해 dev->pm_domain->ops에 들어있는
+	콜백을 선택합니다. 
+
     2.	Otherwise, if both dev->type and dev->type->pm are present, the callback
 	included in dev->type->pm will be chosen for execution.
+
+	2.	그렇지 않고, 만약 both dev->type와 dev->type->pm이 존재하면, 실행을 위해 
+	dev->type->pm에 있는 콜백이 선택됩니다. 
 
     3.	Otherwise, if both dev->class and dev->class->pm are present, the
 	callback included in dev->class->pm will be chosen for execution.
 
+	3.	그렇지 않고, 만약 both dev->class와 dev->class->pm이 존재하면, 실행을 위해 
+	dev->class->pm에 있는 콜백이 선택됩니다.
+
     4.	Otherwise, if both dev->bus and dev->bus->pm are present, the callback
 	included in dev->bus->pm will be chosen for execution.
+
+	4.	그렇지 않고, 만약 dev->bus와 dev->bus->pm are present가 모두 존재하면, 실행시 
+	dev->bus->pm에 있는 콜백이 실행합니다. 
 
 This allows PM domains and device types to override callbacks provided by bus
 types or device classes if necessary.
