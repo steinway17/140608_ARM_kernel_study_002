@@ -409,7 +409,9 @@ other callbacks and, for example, type callbacks take precedence over bus, class
 and driver callbacks.  To be precise, the following rules are used to determine
 which callback to execute in the given phase:
 
-
+모든 상태들은 PM domain, bus, type, class 혹은 드라이버 콜백(dev->pm_domain->ops, 
+dev->bus->pm, dev->type->pm, dev->class->pm 혹은 dev->driver->pm에 정의된 메소드들)을 
+사용합니다.
 
     1.	If dev->pm_domain is present, the PM core will choose the callback
 	included in dev->pm_domain->ops for execution
