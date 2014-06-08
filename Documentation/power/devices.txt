@@ -737,11 +737,16 @@ it into account in any way.
 
 
 Device Low Power (suspend) States
+장치 저전력 (정지, suspend) 상태 
 ---------------------------------
 Device low-power states aren't standard.  One device might only handle
 "on" and "off, while another might support a dozen different versions of
 "on" (how many engines are active?), plus a state that gets back to "on"
 faster than from a full "off".
+
+장치 저전력 상태는 표준이 아닙니다. 어떤 장치는 "켜고" "끄고" 만 다룰 수 있는 반면, 나머지
+는 많은 수의 "켜는" 버전을 지원할 수도 있고, 더욱이 완전히 "꺼진" 상태로부터 빠르게 "켜진"
+상태를 지원 할 수도 있습니다.
 
 Some busses define rules about what different suspend states mean.  PCI
 gives one example:  after the suspend sequence completes, a non-legacy
@@ -749,10 +754,19 @@ PCI device may not perform DMA or issue IRQs, and any wakeup events it
 issues would be issued through the PME# bus signal.  Plus, there are
 several PCI-standard device states, some of which are optional.
 
+어떤 버스들은 정지 상태가 어떻게 다르게 의미하는지를 룰을 정합니다. PCI는 예를 들면: 정지
+순서가 완료된 후, 어떠한 예전 PCI도 DMA를 하거나 IRQ를 박생시키거나 하지 않으며, PME#
+버스 시그널을 통해 wakeup 이벤트를 발생시키지 않습니다.  
+
 In contrast, integrated system-on-chip processors often use IRQs as the
 wakeup event sources (so drivers would call enable_irq_wake) and might
 be able to treat DMA completion as a wakeup event (sometimes DMA can stay
 active too, it'd only be the CPU and some peripherals that sleep).
+
+반대로, 통합 SoC 프로세서들은 wakeup 이벤트 소스로서 종종 IRQ를 사용하며(그래서 드라이버
+들은 enable_irq_wake()를 호출 할 수 있다) wakeup 이벤트로서 DMA 완료를 다룰 수도 있
+습니다(때때로 DMA는 활성화 된 상태로 유지될 수 있으며, CPU이거나 몇몇의 슬립된 주변장치가
+될 수 있음).
 
 Some details here may be platform-specific.  Systems may have devices that
 can be fully active in certain sleep states, such as an LCD display that's
