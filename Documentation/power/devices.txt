@@ -378,15 +378,23 @@ events.
 
 
 Call Sequence Guarantees
+호출 순서 보장
 ------------------------
 To ensure that bridges and similar links needing to talk to a device are
 available when the device is suspended or resumed, the device tree is
 walked in a bottom-up order to suspend devices.  A top-down order is
 used to resume those devices.
 
+장치와 통신할 필요가 있는 브릿지와 그와 비슷한 링크들은 해당 장치가 정지 혹은 재개 되었을 때
+가능하다라는 것을 보장 하기 위해, 장치 트리는 장치를 정지시키기 위해 bottom-up 순서로
+순회 합니다. 재개할 때는 top-down 순서가 쓰이죠.
+
 The ordering of the device tree is defined by the order in which devices
 get registered:  a child can never be registered, probed or resumed before
 its parent; and can't be removed or suspended after that parent.
+
+디바이스 트리의 순서를 매기는 것은 장치가 등록된 순서에 의해 정의 됩니다: 자식은 부모 전에는 
+절대 등록되거나 probe되거나 resume되지 않습니다; 그리고 부모 이후에 제거되거나 정지되지 않습니다.
 
 The policy is that the device tree should match hardware bus topology.
 (Or at least the control bus, for devices which use multiple busses.)
@@ -396,6 +404,11 @@ device to suspend) or has already suspended, as well as after all of the other
 devices have been suspended.  Device drivers must be prepared to cope with such
 situations.
 
+디바이스 트리는 하드웨어 버스 토폴로지와 일치해야 한다는게 바로 정책입니다. (혹은 적어도, 다중의 
+버스들을 사용하는 장치들을 위해서, 컨트롤 버스에 대해서는...) 특히, 이것은 장치 등록이 해당 장치의 
+부모가 정지하고 있다거나 이미 정지했거나, 더군다나 모든 다른 장치들이 정지되었다면 어쩌면 실패할 
+수도 있다는 것을 의미합니다. (i.e. PM core에 의해 다음번 정지될 장치로 결정되었다면) 디바이스 
+드라이버는 반드시 그러한 상황에 대비해 있어야 합니다. 
 
 System Power Management Phases
 시스템 전력 관리 상태
